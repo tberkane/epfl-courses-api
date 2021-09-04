@@ -18,9 +18,8 @@ var CourseSchema = new Schema({
     type: String,
     required: true,
   },
-  given: { type: Boolean, required: true },
   teachers: [String],
-  teacher_links : [String],
+  teacher_links: [String],
   section: {
     type: String,
     required: true,
@@ -30,7 +29,6 @@ var CourseSchema = new Schema({
   specializations: [String],
   hours: [Number],
   credits: { type: Number, required: true },
-  places: { type: Number },
   semester: { type: String, required: true, enum: ['Fall', 'Spring'] },
   exam_period: {
     type: String,
@@ -38,10 +36,12 @@ var CourseSchema = new Schema({
     enum: ['Semester', 'Period'],
   },
   exam_type: { type: String, enum: ['Written', 'Oral', 'During the semester'] },
-  droppable: { type: Boolean },
-  group: { type: Number, required: true, enum: [1, 2] },
-  year_given: { type: String, trim: true },
+  group: { type: String, required: true },
   language: { type: String, enum: ['EN', 'FR', 'DE'] },
+  remark: {
+    type: String,
+    trim: true,
+  },
 });
 
 //Export model
