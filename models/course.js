@@ -30,11 +30,6 @@ var CourseSchema = new Schema({
   hours: [Number],
   credits: { type: Number, required: true },
   semester: { type: String, required: true, enum: ['Fall', 'Spring'] },
-  exam_period: {
-    type: String,
-    required: true,
-    enum: ['Semester', 'Period'],
-  },
   exam_type: { type: String, enum: ['Written', 'Oral', 'During the semester'] },
   group: { type: String, required: true },
   language: { type: String, enum: ['EN', 'FR', 'DE'] },
