@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var CourseSchema = new Schema({
   code: {
     type: String,
-    required: true,
     uppercase: true,
     trim: true,
   },

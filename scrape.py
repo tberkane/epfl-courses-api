@@ -11,13 +11,12 @@ collection.drop()  # reset collection
 
 data = []
 
-url = 'https://edu.epfl.ch/studyplan/en/master/computer-science/'
-#url = 'https://edu.epfl.ch/studyplan/en/master/electrical-and-electronics-engineering/'
+url = 'https://edu.epfl.ch/studyplan/en/master/'
 page = requests.get(url)
 soup = BeautifulSoup(page.content, 'html.parser')
 
-group_elements = [g.parent for g in soup.find_all(
-    'h4', string=re.compile('Group .*'))]
+group_elements = [g for g in soup.find_all(
+    'div', class_='study-plan-master')]
 for (i, group_element) in enumerate(group_elements):
     course_elements = group_element.find_all('div', class_='line-down')
     for course_element in course_elements:
@@ -36,20 +35,25 @@ for (i, group_element) in enumerate(group_elements):
             link = ''
 
         code = info_element.text.split()[0]
+        if code == '/':
+            code = ''
         section = info_element.text.split()[-1]
         teachers = [a.text for a in teacher_element.find_all('a')]
         teacher_links = [a['href'] for a in teacher_element.find_all('a')]
 
         language = course_element.find('div', class_='langue').abbr.text
-
-        semester = 'Fall' if exam_element.b.text == 'Winter session' else 'Spring'
+        print(course_element)
+        if exam_element.b:
+            semester = 'Fall' if exam_element.b.text == 'Winter session' else 'Spring'
+        else:
+            semester = ''
         exam_type = exam_element.span.text
         if exam_type == 'During the semester':
             exam_type = 'Semester'
 
-        hours_element = course_element.find(
-            attrs={'data-title': 'Master ' + ('1' if semester == 'Fall' else '2')})
-        print(course_element)
+        """ hours_element = course_element.find(
+            attrs={'data-title': 'Master ' + ('1' if semester == 'Fall' else '2')}) """
+        hours_element = course_element.div.contents[2] if semester == 'Fall' else course_element.div.contents[3]
         hours = [int(h.text[0]) if h.text[-1] ==
                  'h' else 0 for h in hours_element.find_all('div', class_='cep')]
 
