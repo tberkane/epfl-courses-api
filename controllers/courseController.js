@@ -1,18 +1,27 @@
 var createError = require('http-errors');
+const mongoose = require('mongoose');
 
-var Course = require('../models/course');
+var template = require('../models/course');
 
-exports.all_courses = async function (req, res) {
-  const courses = await Course.find();
-  res.send(courses);
-};
+const models = new Map();
 
-exports.single_course = async function (req, res, next) {
-  const course = await Course.findOne({
-    code: req.params.courseCode,
-  });
-  if (!course) {
+exports.all_courses = async function (req, res, next) {
+  if (!models.has(req.params.section)) {
+    models.set(
+      req.params.section,
+      mongoose.model(
+        'courses.' + req.params.section,
+        new mongoose.Schema(
+          { template },
+          { collection: 'courses.' + req.params.section }
+        )
+      )
+    );
+  }
+
+  const courses = await models.get(req.params.section).find();
+  if (!courses) {
     return next(createError(404));
   }
-  res.send(course);
+  res.send(courses);
 };

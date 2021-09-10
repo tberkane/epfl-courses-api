@@ -1,8 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
-
-var CourseSchema = new Schema({
+const template = {
   code: {
     type: String,
     uppercase: true,
@@ -36,7 +34,7 @@ var CourseSchema = new Schema({
     type: String,
     trim: true,
   },
-});
+};
 
 //Export model
-module.exports = mongoose.model('Course', CourseSchema);
+module.exports = template;
