@@ -10,7 +10,7 @@ var coursesRouter = require('./routes/courses');
 
 var app = express();
 
-//Set up mongoose connection
+// set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB =
   'mongodb+srv://tberkane:43QcccltS7Y89I2D@cluster0.07kae.mongodb.net/epfl_courses?retryWrites=true&w=majority';

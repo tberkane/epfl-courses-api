@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const template = {
+// template for a course, the model is then dynamically created in the controller
+const courseTemplate = {
   code: {
     type: String,
     uppercase: true,
@@ -37,4 +36,4 @@ const template = {
 };
 
 //Export model
-module.exports = template;
+module.exports = courseTemplate;
