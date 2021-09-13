@@ -1,11 +1,15 @@
 {
   "name": "epfl-courses",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.19.0"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "serverstart": "DEBUG=epfl-courses:* npm run devstart"
+    "serverstart": "DEBUG=epfl-courses:* npm run devstart",
+    "test": "jest"
   },
   "dependencies": {
     "async": "^3.2.1",
@@ -14,9 +18,14 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "helmet": "^4.6.0",
     "http-errors": "~1.6.3",
     "mongoose": "^5.13.7",
     "morgan": "~1.9.1",
     "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.2.0",
+    "supertest": "^6.1.6"
   }
 }
