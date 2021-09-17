@@ -1,9 +1,11 @@
 from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
+from dotenv import dotenv_values
+config = dotenv_values('epfl-courses-api/.env')
 
 client = MongoClient(
-    'mongodb+srv://tberkane:43QcccltS7Y89I2D@cluster0.07kae.mongodb.net/epfl_courses?retryWrites=true&w=majority')
+    config['DB_URL'])
 db = client.epfl_courses.courses
 
 db.drop()  # reset db
