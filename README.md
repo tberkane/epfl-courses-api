@@ -1,6 +1,6 @@
 # epfl-courses-api
 Back-end for the EPFLCourses website.
-The website can be viewed here[https://epfl-courses.herokuapp.com/].
+The website can be viewed [here](https://epfl-courses.herokuapp.com/).
 
 ## Getting started
 
